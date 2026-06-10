@@ -1,6 +1,6 @@
 {
-  "engines" :{
-    "node" :"24.13.1"
+  "engines": {
+    "node": "24.13.1"
   },
   "name": "project_1",
   "version": "1.0.0",
@@ -13,7 +13,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "cloudinary": "^2.10.0",
+    "cloudinary": "^1.41.3",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^6.0.0",
     "dotenv": "^17.4.2",
