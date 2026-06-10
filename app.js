@@ -30,11 +30,8 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-// let MONGO_URL = "mongodb://127.0.0.1:27017/travelo";
 const dbUrl = process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/travelo";
 
-// Force Node's DNS resolver to use reliable public servers to avoid
-// `querySrv ECONNREFUSED` errors when resolving mongodb+srv hostnames.
 try {
   dns.setServers(["8.8.8.8", "1.1.1.1"]);
 } catch (e) {
@@ -60,7 +57,7 @@ main();
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
-    secret: Process.env.SECRET,
+    secret: process.env.SECRET,
   },
   touchAfter: 24 * 3600,
 });
