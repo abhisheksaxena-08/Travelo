@@ -16,6 +16,7 @@ async function main() {
     await User.register(owner, process.env.SEED_PASSWORD || "TraveloDemo123!");
   }
 
+  console.log(`Database: ${mongoose.connection.name}`);
   await Listing.deleteMany({});
 
   const destinations = [
@@ -51,7 +52,9 @@ async function main() {
     });
   }
   const listings = [...baseListings, ...generatedListings];
-  console.log(`Database updated: ${listings.length} listings added`);
+  const inserted = await Listing.insertMany(listings);
+  console.log(`Database updated: ${inserted.length}/${listings.length} listings added`);
+  console.log(`Verified count: ${await Listing.countDocuments({})}`);
   await mongoose.disconnect();
 }
 
