@@ -13,11 +13,13 @@ Create a `.env` file with `ATLASDB_URL`, `SECRET`, and Cloudinary credentials (`
 
 ## Database
 
-Refresh the seed listings:
+Refresh the database with exactly 100 curated and generated listings:
 
 ```bash
 npm run db:update
 ```
+
+This replaces existing listings with the seed collection and assigns them to the `travelo-demo` owner. If the demo user is missing, the script creates it automatically.
 
 ## Development checks
 
