@@ -27,7 +27,7 @@ module.exports.isOwner = async (req, res, next) => {
     req.flash("error", "Listing not found");
     return res.redirect("/listings");
   }
-  if (!listing.owner.equals(res.locals.currUser._id)) {
+  if (!res.locals.currUser || !listing.owner.equals(res.locals.currUser._id)) {
     req.flash("error", "you don't have permission ");
     return res.redirect(`/listings/${id}`);
   }

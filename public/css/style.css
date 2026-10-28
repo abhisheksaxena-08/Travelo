@@ -192,3 +192,26 @@ body{
    padding : 0.5rem 3rem 0.5rem 3rem ;
    font-size: 0.8rem;
 }
+
+/* Futuristic Travelo interface */
+:root { --ink: #101828; --muted: #667085; --accent: #ff385c; --surface: rgba(255,255,255,.82); }
+body { font-family: "Plus Jakarta Sans", sans-serif; color: var(--ink); background: #f7f8fc !important; }
+.navbar { height: auto !important; min-height: 74px; padding: .75rem 2rem !important; background: rgba(255,255,255,.86) !important; backdrop-filter: blur(18px); box-shadow: 0 1px 0 rgba(16,24,40,.06); }
+.brand-logo { display: flex; align-items: center; gap: .55rem; color: var(--accent) !important; font-weight: 800; font-size: 1.35rem; }
+.brand-logo span { letter-spacing: -.04em; }.brand-logo i { font-size: 1.55rem; }
+.nav-link { font-weight: 650; padding: .65rem .85rem !important; }
+.search-inp { min-width: 220px; border: 1px solid rgba(16,24,40,.12); background: rgba(255,255,255,.9); }
+.btn-search { background: var(--accent); border-radius: 999px; box-shadow: 0 8px 20px rgba(255,56,92,.22); }
+.container { max-width: 1240px; }
+.discover-hero { margin-top: 1.25rem; min-height: 260px; border-radius: 28px; display: flex; align-items: end; padding: 42px; color: white; overflow: hidden; position: relative; background: linear-gradient(120deg, rgba(15,23,42,.82), rgba(15,23,42,.08)), url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=85") center/cover; box-shadow: 0 24px 60px rgba(16,24,40,.12); }
+.discover-hero h1 { font-size: clamp(2.2rem,5vw,4.3rem); max-width: 650px; letter-spacing: -.055em; margin: .55rem 0; line-height: .95; }
+.discover-hero h1 em { color: #ffb4c0; font-style: normal; }.discover-hero p { font-size: 1.05rem; opacity: .88; margin: 0; }.hero-eyebrow { text-transform: uppercase; letter-spacing: .13em; font-size: .72rem; font-weight: 800; }
+#filters { display: flex; gap: 1rem; overflow-x: auto; flex-wrap: nowrap !important; margin: 1.25rem 0 .25rem; padding-bottom: .35rem; scrollbar-width: none; }
+.filter { flex: 0 0 auto; width: 82px; min-width: 82px; margin: 0 !important; padding: 12px 8px 8px; border-radius: 16px; transition: .25s ease; }
+.filter:hover { opacity: 1; background: white; box-shadow: 0 10px 30px rgba(16,24,40,.08); transform: translateY(-2px); }.filter i { font-size: 1.05rem; }.filter p { margin: 7px 0 0; font-weight: 700; }
+.tax-toggle { flex: 0 0 auto; height: 48px; margin-left: auto !important; padding: 0 14px; border: 1px solid rgba(16,24,40,.08); border-radius: 14px; background: white; }
+.listing-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 28px 22px; }.listing-link { display: block; }.listing-card { border-radius: 20px; }.listing-image-wrap { position: relative; overflow: hidden; border-radius: 18px; background: #e8eaf0; }.listing-image { width: 100%; height: 290px; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2,.7,.2,1); }.listing-card:hover .listing-image { transform: scale(1.035); }.listing-badge { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: white; background: rgba(16,24,40,.38); backdrop-filter: blur(8px); }
+.listing-body { padding: 12px 3px 0; }.listing-heading { display: flex; justify-content: space-between; align-items: start; gap: 10px; }.listing-heading h2 { font-size: 1.02rem; font-weight: 800; margin: 0; letter-spacing: -.025em; }.listing-heading span { white-space: nowrap; font-size: .82rem; font-weight: 700; }.listing-heading span i { font-size: .68rem; }.listing-body > p { color: var(--muted); margin: 5px 0 8px; font-size: .86rem; }.listing-price { font-size: .88rem; }.listing-price strong { font-size: 1rem; }.tax-info { display: none; color: var(--muted); margin-left: 6px; }
+.empty-state { text-align: center; padding: 80px 20px; color: var(--muted); }.empty-state i { font-size: 2rem; color: var(--accent); }.empty-state h2 { color: var(--ink); margin-top: 12px; }
+@media (max-width: 992px) { .listing-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }.search-inp { min-width: 150px; }.discover-hero { min-height: 230px; padding: 30px; } }
+@media (max-width: 576px) { .navbar { padding: .65rem 1rem !important; }.listing-grid { grid-template-columns: 1fr; }.discover-hero { min-height: 210px; border-radius: 18px; padding: 22px; }.listing-image { height: 260px; }.tax-toggle { display: none; }.search-inp { display: none; }.container { padding-left: 16px; padding-right: 16px; }}

@@ -1,7 +1,15 @@
 const Listing = require("../models/listing");
 
 module.exports.index = async (req, res) => {
-  let allListing = await Listing.find({});
+  const { q } = req.query;
+  const filter = q
+    ? { $or: [
+        { title: { $regex: q, $options: "i" } },
+        { location: { $regex: q, $options: "i" } },
+        { country: { $regex: q, $options: "i" } },
+      ] }
+    : {};
+  const allListing = await Listing.find(filter);
   res.render("listings/index.ejs", { allListing });
 };
 
@@ -51,11 +59,12 @@ module.exports.editListing = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params;
-  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-  if (typeof req.file !== "undefined") {
-    ((url = req.file.path),
-      (filename = req.file.filename),
-      (listing.image = { url, filename }));
+  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true, runValidators: true });
+  if (req.file) {
+    listing.image = {
+      url: req.file.path || req.file.location || req.file.url,
+      filename: req.file.filename,
+    };
     await listing.save();
   }
   req.flash("success", "listing updated successfully");

@@ -29,6 +29,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 const dbUrl = process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/travelo";
+const sessionSecret = process.env.SECRET || "travelo-development-secret";
 
 try {
   dns.setServers(["8.8.8.8", "1.1.1.1"]);
@@ -55,7 +56,7 @@ main();
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
-    secret: process.env.SECRET,
+    secret: sessionSecret,
   },
   touchAfter: 24 * 3600,
 });
@@ -63,12 +64,11 @@ const store = MongoStore.create({
 const sessionOptions = {
   store: store,
 
-  secret: process.env.SECRET,
+  secret: sessionSecret,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 3,
-    maxAge: +1000 * 60 * 60 * 24 * 3,
+    maxAge: 1000 * 60 * 60 * 24 * 3,
     httpOnly: true,
   },
 };
@@ -90,6 +90,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/", (req, res) => res.redirect("/listings"));
 app.use("/listings", listingRouter);
 
 app.use("/listings/:id/reviews", reviewRouter);

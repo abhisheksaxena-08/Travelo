@@ -1,5 +1,13 @@
 <% layout("/layout/boilerplate.ejs") %>
 
+<section class="discover-hero">
+  <div>
+    <span class="hero-eyebrow"><i class="fa-solid fa-location-dot"></i> Discover your next stay</span>
+    <h1>Stay somewhere <em>extraordinary.</em></h1>
+    <p>Handpicked homes, cabins and escapes for your next adventure.</p>
+  </div>
+</section>
+
   <div id="filters">
     <div class="filter">
       <div> <i class="fa-solid fa-fire"></i></div>
@@ -55,43 +63,39 @@
       </div>
     </div>
   </div>
-  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3 ">
+  <div class="listing-grid mt-4">
     <% for(listing of allListing){ %>
-      <a class="listing-link" href="/listings/<%=listing._id %>">
-        <div class="card col listing-card">
-          <img src="<%=listing.image.url%>" class="card-img-top" alt="..." style="height:20rem">
-          <div class="card-img-overlay">
-            <p class="card-text"><%=listing.title %></p>
-            <p class="card-text"></p>
+      <a class="listing-link" href="/listings/<%=listing._id %>" aria-label="View <%=listing.title %>">
+        <article class="listing-card">
+          <div class="listing-image-wrap">
+            <img src="<%=listing.image && listing.image.url ? listing.image.url : '/images/placeholder.jpg'%>" class="listing-image" alt="<%=listing.title %>" loading="lazy">
+            <span class="listing-badge"><i class="fa-solid fa-heart"></i></span>
           </div>
-
-
-          <div class="card-body">
-            <p class="card-text" ><b>
-                <%=listing.title %>
-              </b>
-              <br>&#8377; <%=listing.price %>/ night
-                <i class="tax-info"> &nbsp; &nbsp; +18% gst </i> <br>
-                <%=listing.location %> &nbsp; &nbsp;
-                  <%=listing.country %>
-            </p>
+          <div class="listing-body">
+            <div class="listing-heading">
+              <h2><%=listing.title %></h2>
+              <span><i class="fa-solid fa-star"></i> 4.9</span>
+            </div>
+            <p><%=listing.location %>, <%=listing.country %></p>
+            <div class="listing-price"><strong>&#8377; <%=Number(listing.price || 0).toLocaleString("en-IN") %></strong> night
+              <span class="tax-info">+18% GST</span>
+            </div>
           </div>
-        </div>
-        <% } %>
+        </article>
+      </a>
+    <% } %>
   </div>
+  <% if(!allListing || allListing.length === 0) { %>
+    <div class="empty-state"><i class="fa-solid fa-house-circle-exclamation"></i><h2>No stays found</h2><p>Try another destination or add your own home.</p></div>
+  <% } %>
 
   <script>
-    let taxSwitch = document.getElementById("switchCheckDefault")
-    taxSwitch.addEventListener("click", () => {
-      let taxInfo = document.getElementsByClassName("tax-info")
-      for (info of taxInfo) {
-        if (info.style.display != "inline") {
-          info.style.display = "inline"
-        } else {
-          info.style.display = "none"
-        }
-
-
-      }
-    })
+    const taxSwitch = document.getElementById("switchCheckDefault")
+    if (taxSwitch) {
+      taxSwitch.addEventListener("change", () => {
+        document.querySelectorAll(".tax-info").forEach((info) => {
+          info.style.display = taxSwitch.checked ? "inline" : "none"
+        })
+      })
+    }
   </script>

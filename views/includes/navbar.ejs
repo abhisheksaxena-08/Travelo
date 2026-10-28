@@ -1,7 +1,7 @@
 
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-md sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-brands fa-avianex"></i></a>
+    <a class="navbar-brand brand-logo" href="/listings"><i class="fa-brands fa-avianex"></i><span>travelo</span></a>
     <button
       class="navbar-toggler"
       type="button"
@@ -21,8 +21,8 @@
 
       <div class="navbar-nav ms-auto">
        
-    <form class="d-flex" role="search">
-      <input class="form-control me-2 search-inp" type="search" placeholder="Search destination"/>
+    <form class="d-flex" role="search" action="/listings" method="GET">
+      <input class="form-control me-2 search-inp" name="q" type="search" placeholder="Search destination"/>
       <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
     </form>
   </div>
